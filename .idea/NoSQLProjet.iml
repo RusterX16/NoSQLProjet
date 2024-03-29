@@ -5,7 +5,10 @@
       <excludeFolder url="file://$MODULE_DIR$/.idea/copilot/chatSessions" />
       <excludeFolder url="file://$MODULE_DIR$/.venv" />
     </content>
-    <orderEntry type="inheritedJdk" />
+    <orderEntry type="jdk" jdkName="Python 3.11" jdkType="Python SDK" />
     <orderEntry type="sourceFolder" forTests="false" />
+  </component>
+  <component name="SonarLintModuleSettings">
+    <option name="uniqueId" value="5e6cf514-4ad1-44f9-bdfa-4ed0fc9d4a1a" />
   </component>
 </module>

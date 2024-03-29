@@ -2,7 +2,7 @@
 # Question 10:                                                                #
 # Donner les utilisateurs ayant plus de 10 followers (dans ce jeu de données) #
 # ########################################################################### #
-from db.mongodb_user_service import get_users_screennames_with_more_than_n_followers
+from services.user.mongodb_user_service import get_users_screennames_with_more_than_n_followers
 from db.mongdb import MongoDB
 
 db = MongoDB()

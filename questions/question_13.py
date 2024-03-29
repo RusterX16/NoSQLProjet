@@ -2,7 +2,7 @@
 # Question 13:                                                                                                         #
 # Donner les 10 hashtags les plus populaires (i.e la popularité se mesure au nombre de fois où le hashtag est utilisé) #
 # #################################################################################################################### #
-from db.mongodb_hashtag_service import get_most_popular_hashtags
+from services.hashtag.mongodb_hashtag_service import get_most_popular_hashtags
 from db.mongdb import MongoDB
 
 db = MongoDB()

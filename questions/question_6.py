@@ -2,11 +2,28 @@
 # Question 6:                                              #
 # Donner les tweets qui sont des réponses à un autre tweet #
 # ######################################################## #
+from services.tweet.neo4j_tweet_service import get_reply_tweets
 from db.mongdb import MongoDB
+from db.neo4jdb import Neo4J
 
 db = MongoDB()
 initial_match = {"replyIdTweet": {"$ne": None}}
 results = db.get('tweets', initial_match)
 
 for i, result in enumerate(results):
-    print(f"[{i+1}] {result['idTweet']}: {result['text']}")
+    print(f"[MongoDB] [{i+1}] {result['idTweet']}: {result['text']}")
+
+db.close()
+
+neo = Neo4J()
+query = "MATCH (:Tweet)-[:REPLY_TO]->(reply:Tweet) RETURN reply"
+results = neo.query(query)
+
+if results:
+    for i, record in enumerate(results):
+        tweet = record['reply']
+        print(f"[Neo4J] [{i + 1}] {tweet['id']}: {tweet['text']}")
+else:
+    print("No reply tweets found.")
+
+neo.close()
