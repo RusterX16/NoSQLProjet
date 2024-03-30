@@ -10,8 +10,11 @@ db = MongoDB()
 initial_match = {"replyIdTweet": {"$ne": None}}
 results = db.get('tweets', initial_match)
 
-for i, result in enumerate(results):
-    print(f"[MongoDB] [{i+1}] {result['idTweet']}: {result['text']}")
+if results:
+    for i, result in enumerate(results):
+        print(f"[MongoDB] [{i+1}] {result['idTweet']}: {result['text']}")
+else:
+    print("[MongoDB] No reply tweets found.")
 
 db.close()
 
@@ -24,6 +27,6 @@ if results:
         tweet = record['reply']
         print(f"[Neo4J] [{i + 1}] {tweet['id']}: {tweet['text']}")
 else:
-    print("No reply tweets found.")
+    print("[Neo4J] No reply tweets found.")
 
 neo.close()

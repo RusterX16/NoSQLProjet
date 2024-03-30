@@ -93,7 +93,7 @@ def get_users_screennames_with_more_than_n_followers(db, n):
 
     return users_screennames
 
-def get_users_screennames_with_more_than_n_followees(db, n):
+def get_users_screennames_with_more_than_n_followings(db, n):
     """
     Retrieve the screen names of users who follow more than 'n' users.
 

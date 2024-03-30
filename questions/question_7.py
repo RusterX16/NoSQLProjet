@@ -17,7 +17,7 @@ if searched_user_doc:
     follower_count = len(result)
     print(f"[MongoDB] Followers de {user_to_find} ({follower_count}): {result}")
 else:
-    print("User not found.")
+    print("[MongoDB] User not found.")
 
 db.close()
 
@@ -30,6 +30,6 @@ if results:
     followers = [record["name"] for record in results]
     print(f"[Neo4J] Followers de {user_to_find} ({follower_count}): {followers}")
 else:
-    print("User not found.")
+    print("[Neo4J] User not found.")
 
 neo.close()

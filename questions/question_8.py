@@ -15,21 +15,21 @@ if searched_user_doc:
     searched_user_id = searched_user_doc["idUser"]
     result = get_following_screennames_by_user_id(db=db, user_id=searched_user_id)
     following_count = len(result)
-    print(f"Utilisateurs suivis par {user_to_find} ({following_count}): {result}")
+    print(f"[MongoDB] Utilisateurs suivis par {user_to_find} ({following_count}): {result}")
 else:
-    print("User not found.")
+    print("[MongoDB] User not found.")
 
 db.close()
 
 neo = Neo4J()
-query = f"MATCH (u:User {name: '{user_to_find}'})-[:FOLLOWS]->(following:User) RETURN following.name AS name"
+query = "MATCH (u:User {name: $username})-[:FOLLOWS]->(following:User) RETURN following.name AS name"
 results = neo.query(query, params={"username": user_to_find})
 
 if results:
     following_users = [record["name"] for record in results]
     following_count = len(following_users)
-    print(f"Utilisateurs suivis par {user_to_find} ({following_count}): {following_users}")
+    print(f"[Neo4J] Utilisateurs suivis par {user_to_find} ({following_count}): {following_users}")
 else:
-    print(f"No users are followed by {user_to_find}.")
+    print(f"[Neo4J] No users are followed by {user_to_find}.")
 
 neo.close()
