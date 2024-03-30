@@ -11,8 +11,8 @@ db = MongoDB()
 hashtags = get_most_popular_hashtags_mongo(db, 10)
 print("[MongoDB] Top 10 Most Popular Hashtags:")
 
-for hashtag in hashtags:
-    print(f"#{hashtag['_id']} ({hashtag['unique_tweet_count']})")
+for i, hashtag in enumerate(hashtags):
+    print(f"[{i}] #{hashtag['_id']} ({hashtag['unique_tweet_count']})")
 
 db.close()
 
@@ -20,7 +20,7 @@ neo = Neo4J()
 hashtags = get_most_popular_hashtags_neo(neo, 10)
 print("[Neo4J] Top 10 Most Popular Hashtags:")
 
-for hashtag in hashtags:
-    print(f"#{hashtag['hashtag']} ({hashtag['tweetCount']})")
+for i, hashtag in enumerate(hashtags):
+    print(f"[{i}] #{hashtag['hashtag']} ({hashtag['tweetCount']})")
 
 neo.close()

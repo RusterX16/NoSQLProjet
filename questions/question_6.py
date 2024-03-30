@@ -2,7 +2,6 @@
 # Question 6:                                              #
 # Donner les tweets qui sont des réponses à un autre tweet #
 # ######################################################## #
-from services.tweet.neo4j_tweet_service import get_reply_tweets
 from db.mongdb import MongoDB
 from db.neo4jdb import Neo4J
 
