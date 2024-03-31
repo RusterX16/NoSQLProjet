@@ -4,28 +4,31 @@
 # ###################################### #
 from services.tweet.mongodb_tweet_service import find_longest_thread
 from db.neo4jdb import Neo4J
-from db.mongdb import MongoDB
+from db.mongodb import MongoDB
 
+# MongoDB
 db = MongoDB()
 longest_thread = find_longest_thread(db)
-print("[MongoDB] Longest discussion:")
+print("[MongoDB] La discussion la plus longue :")
 
 if longest_thread:
-    discussion = longest_thread[0]  # Assuming the result is a list with one entry
+    discussion = longest_thread[0]
     depth = discussion['numberOfReplies']
-    thread = discussion['thread']
-    print(f"Depth: {depth}")
+    print(f"Longueur de la discussion : {depth}")
 
-    for i, tweet in enumerate(thread):
-        text = tweet.get('text', '[No text available]')
-        createdAt = tweet.get('createdAt', '[No date available]')
-        tweetDepth = tweet.get('depth', '[No depth available]')
-        print(f"[{tweetDepth}] {createdAt}: {text}")
+    for i, tweet in enumerate(discussion['thread']):
+        # La variable `i` représente la profondeur, c'est l'index dans la liste `thread`.
+        text = tweet.get('text', '[Texte non disponible]')
+        createdAt = tweet.get('createdAt', '[Date non disponible]')
+        # Utilisez `i` pour l'affichage de la profondeur de la réponse.
+        position = "Tweet initial" if i == 0 else f"Réponse {i}"
+        print(f"[{position}]: {text}")
 else:
-    print("No discussion found.")
+    print("Aucune discussion trouvée.")
 
 db.close()
 
+# Neo4J
 neo = Neo4J()
 query = """
     MATCH p=(t:Tweet)-[:REPLY_TO*]->(reply:Tweet)
@@ -34,19 +37,16 @@ query = """
     LIMIT 1
     UNWIND nodes(p) AS tweet
     RETURN tweet.text AS text, depth
-    """
+"""
 results = neo.query(query)
-print("[Neo4J] Longest discussion:")
+print("[Neo4J] La discussion la plus longue :")
 depth = None
 
 for i, record in enumerate(results):
-    if depth is None:  # Just set the depth once.
+    if depth is None:
         depth = record['depth']
-        print(f"Depth: {depth}")
-
-    if i == 0:
-        print(f"[Root tweet] {record['text']}")
-        continue
-    print(f"[{i - 1}] {record['text']}")
+        print(f"Longueur de la discussion : {depth}")
+    position = "Tweet initial" if i == 0 else f"Réponse {i}"
+    print(f"[{position}]: {record['text']}")
 
 neo.close()

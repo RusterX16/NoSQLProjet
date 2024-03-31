@@ -1,23 +1,23 @@
 def get_most_popular_hashtags(db, n):
     """
     Retrieves the n most popular hashtags based on the number of unique tweets in which they are used.
-    Assumes that 'idTweet' in 'hashtags' is an integer referencing a similar field in 'tweets'.
     """
+    # Pipeline d'agrégation pour identifier les hashtags les plus populaires.
     pipeline = [
         {"$lookup": {
-            "from": "tweets",  # The collection to join with
-            "localField": "idTweet",  # Field from the hashtags collection
-            "foreignField": "idTweet",  # Corresponding integer field in the tweets collection
-            "as": "tweet_info"  # The output array field with joined tweet information
+            "from": "tweets",
+            "localField": "idTweet",
+            "foreignField": "idTweet",
+            "as": "tweet_info"
         }},
-        {"$unwind": "$tweet_info"},  # Deconstruct the tweet_info array
+        {"$unwind": "$tweet_info"},
         {"$group": {
             "_id": "$hashtag",
             "unique_tweet_count": {"$sum": 1}
         }},
-        {"$sort": {"unique_tweet_count": -1}},  # Sort by the count in descending order
+        {"$sort": {"unique_tweet_count": -1}},
         {"$limit": n}
     ]
 
     result_cursor = db.get_collection('hashtags').aggregate(pipeline)
-    return list(result_cursor)
+    return list(result_cursor)  # Retourne les résultats sous forme de liste.

@@ -1,0 +1,10 @@
+
+†python:S1192}"HDefine a constant instead of duplicating this literal '$lookup' 4 times.(¤ªä’J$7cad9eab-2571-40c4-835d-b91c1d7b2396
+…python:S1192¶"FDefine a constant instead of duplicating this literal '$sort' 4 times.(ÄÄñ˜J$1c2fd059-864e-47c4-9ca5-ef6bdf285bda
+”python:S1192+"QDefine a constant instead of duplicating this literal 'Base de donnÃ©es' 5 times.(®°ÔŒûÿÿÿÿJ$16d025f0-6105-4f13-b1cd-54abdfd0f823
+‹python:S1192¹"GDefine a constant instead of duplicating this literal '$limit' 3 times.(é»“ıÿÿÿÿJ$58e4e92f-dc4c-4c01-b7c2-e6c4ea9f20ce
+‹python:S1192…"GDefine a constant instead of duplicating this literal '$match' 5 times.(Ğº ‹üÿÿÿÿJ$24282173-c353-4604-9408-ea1524c6c1c7
+ˆpython:S1192Â"IDefine a constant instead of duplicating this literal '$project' 4 times.(Â‚ˆ—J$d46bf4d8-342c-4bb9-b9cd-c87a2bf75253
+rpython:S1656%"/Remove or correct this useless self-assignment.(Ä¬¾ûÿÿÿÿJ$d7e94d79-d64f-4ef9-80fa-2c8590acf903
+rpython:S1656C"/Remove or correct this useless self-assignment.(ŞğƒÛÿÿÿÿÿJ$deff3dae-6a62-49df-8245-52746919cf8a
+rpython:S1656a"/Remove or correct this useless self-assignment.(¤íÁõşÿÿÿÿJ$265e279c-ce55-4e9e-a40c-2a03065ace78
