@@ -18,3 +18,21 @@ class Neo4J:
         with self._driver.session() as session:
             result = session.run(query, parameters=params or {})
             return [record for record in result]
+
+    # Create a node:
+    def create_node(self, label, properties):
+        """Create a node in the Neo4j database."""
+        # Crée un noeud dans la base de données Neo4j.
+        query = f"CREATE (n:{label} $properties)"
+        self.query(query, params={"properties": properties})
+
+    # Create a relationship:
+    def create_relationship(self, label1, label2, properties):
+        """Create a relationship between two nodes in the Neo4j database."""
+        # Crée une relation entre deux noeuds dans la base de données Neo4j.
+        query = f"""
+            MATCH (a:{label1}), (b:{label2})
+            WHERE a.id = $id1 AND b.id = $id2
+            CREATE (a)-[:RELATIONSHIP $properties]->(b)
+            """
+        self.query(query, params=properties)
